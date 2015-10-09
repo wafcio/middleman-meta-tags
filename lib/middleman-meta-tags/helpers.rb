@@ -28,6 +28,7 @@ module Middleman
         title = full_title(meta_tags)
         meta_tags.delete(:title)
         meta_tags.delete(:separator)
+        meta_tags.delete(:site)
         result << content_tag(:title, title) unless title.blank?
 
         description = safe_description(meta_tags.delete(:description))
@@ -91,9 +92,9 @@ module Middleman
         full_title  = ''
         title       = safe_title(meta_tags[:title])
 
-        (full_title << title) unless title.blank?
-        (full_title << " #{separator} ") unless title.blank? || meta_tags[:site].blank?
         (full_title << meta_tags[:site]) unless meta_tags[:site].blank?
+        (full_title << " #{separator} ") unless title.blank? || meta_tags[:site].blank?
+        (full_title << title) unless title.blank?
         full_title
       end
 
